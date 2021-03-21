@@ -13,8 +13,12 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import javax.imageio.ImageIO;
@@ -25,9 +29,6 @@ public class Controller {
 
     @FXML
     private Canvas canvas;
-
-    @FXML
-    private ImageView imageView;
 
     @FXML
     private ColorPicker colorPicker;
@@ -60,31 +61,28 @@ public class Controller {
         });
     }
 
-    @FXML
     public void Reset() {
-//        g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        g.setFill(Color.WHITE);
-        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        g.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
     }
+
 
     public void onSave() {
-        try {
-            Image snapshot = canvas.snapshot(null, null);
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save");
+        fc.setInitialFileName("Paint");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG File", "*.png"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG File", "*.jpg"));
 
-            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File("paint.png"));
-        } catch (Exception e) {
+        try{
+            File selectedFile = fc.showSaveDialog(new Stage());
+            if(selectedFile != null){
+                Image snapshot = canvas.snapshot(null, null);
+
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot,null), "png", selectedFile);
+            }
+        } catch (Exception e){
             System.out.println("Failed to save image: " + e);
         }
-    }
-
-    public void onOpen() {
-        FileChooser fc = new FileChooser();
-
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-        File selectedFile = fc.showOpenDialog(null);
-        var path = selectedFile.getAbsolutePath();
-
-        ImageView image = new ImageView(path);
     }
 
 

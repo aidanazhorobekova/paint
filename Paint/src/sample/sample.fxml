@@ -24,7 +24,6 @@
             <MenuBar prefHeight="16.0" prefWidth="900.0" style="-fx-background-color: #7F827A;">
                 <Menu text="File">
                     <MenuItem onAction="#onSave" text="Save" />
-               <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open" />
                     <MenuItem onAction="#onExit" text="Exit" />
                 </Menu>
             <Menu mnemonicParsing="false" text="Help">
