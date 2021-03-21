@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,9 +36,6 @@ public class Controller {
     @FXML
     private CheckBox eraser;
 
-    @FXML
-    private GraphicsContext g;
-
 
     @FXML
     public void initialize() {
@@ -61,13 +55,17 @@ public class Controller {
         });
     }
 
+
     public void Reset() {
+        GraphicsContext g = canvas.getGraphicsContext2D();
+
         g.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
     }
 
 
     public void onSave() {
         FileChooser fc = new FileChooser();
+
         fc.setTitle("Save");
         fc.setInitialFileName("Paint");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG File", "*.png"));
@@ -90,4 +88,13 @@ public class Controller {
         Platform.exit();
     }
 
+
+    @FXML
+    public void onAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("Paint is a simple application that allows you to create basic graphic art on a computer.");
+
+        alert.show();
+    }
 }
