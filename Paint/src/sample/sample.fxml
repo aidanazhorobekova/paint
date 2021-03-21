@@ -23,6 +23,7 @@
         <VBox style="-fx-background-color: grey;">
             <MenuBar prefHeight="16.0" prefWidth="900.0" style="-fx-background-color: #7F827A;">
                 <Menu text="File">
+                    <MenuItem onAction="#onOpen" mnemonicParsing="false" text="Open" />
                     <MenuItem onAction="#onSave" text="Save" />
                     <MenuItem onAction="#onExit" text="Exit" />
                 </Menu>

@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -60,6 +61,28 @@ public class Controller {
         GraphicsContext g = canvas.getGraphicsContext2D();
 
         g.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
+    }
+
+
+    public void onOpen() {
+        GraphicsContext g = canvas.getGraphicsContext2D();
+        FileChooser fileChooser = new FileChooser();
+        Image img;
+
+        fileChooser.setTitle("Open image");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG File", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG File", "*.jpg"));
+
+        try{
+            File file = fileChooser.showOpenDialog(new Stage());
+            if(file != null){
+                img = new Image(file.toURI().toString());
+                g.setFill(new ImagePattern(img));
+                g.fillRect(0,0, img.getWidth(), img.getHeight());
+            }
+        } catch (Exception e){
+
+        }
     }
 
 
