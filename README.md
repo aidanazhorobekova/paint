@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Paint 
 
 
@@ -27,3 +28,6 @@ Also, you can upload an image, and save your drawing at the end.
 
 Here is a video, where you can see all that better.
 https://youtu.be/4zkazphPJT0
+=======
+# paint
+>>>>>>> parent of 82df55c (adding screenshots)
